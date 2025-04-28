@@ -1,0 +1,61 @@
+public class Person implements Cloneable {
+    private String name;
+    private int age;
+
+    // Constructor
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    // Overriding the clone method for shallow copy
+    @Override
+    public Person clone() {
+        try {
+            return (Person) super.clone(); // Shallow clone using Object's clone()
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError("Cloning not supported", e);
+        }
+    }
+
+    // Getters
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    // Setters
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    // toString method for easy printing
+    @Override
+    public String toString() {
+        return "Person{name='" + name + "', age=" + age + "}";
+    }
+
+    // Main method to test cloning
+    public static void main(String[] args) {
+        Person original = new Person("Alice", 30);
+        Person cloned = original.clone();
+
+        // Output
+        System.out.println("Original Person: " + original);
+        System.out.println("Cloned Person: " + cloned);
+
+        System.out.println("Are they the same object? " + (original == cloned)); // Should be false
+    }
+}
+
+/* Output
+Original Person: Person{name='Alice', age=30}
+Cloned Person: Person{name='Alice', age=30}
+Are they the same object? false
